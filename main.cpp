@@ -69,5 +69,14 @@ int main(){
         pitch_angle.push_back(atan2(-accel_x[i], sqrt(pow(accel_y[i],2) + pow(accel_z[i],2)))*RAD_TO_DEG);
     }
 
+    fstream result;
+    result.open("result.log", ios::out);
+    if(result.is_open()){
+        for(int i=0 ; i<rows ; i++){
+            write_line(result, time_stamp[i], roll_angle[i], pitch_angle[i]);
+        }
+        result.close();
+    }
+
     return 0;
 }
