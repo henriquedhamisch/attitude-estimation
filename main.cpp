@@ -23,6 +23,11 @@ int sign(int value){
     else {return -1;}
 }
 
+string float_to_string(float value){
+    stringstream ss;
+    ss << value;
+    return ss.str();
+}
 int main(){
     fstream log;
     log.open("data.log", ios::in);          // Open log file into the stream object
