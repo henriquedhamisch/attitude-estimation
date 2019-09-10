@@ -3,10 +3,13 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <math.h>
 using namespace std;
 
 const char DELIMITER = ';';
 const char NEW_LINE = '\n';
+const float MI = 0.01;
+const float RAD_TO_DEG = 180/M_PI;
 
 vector<float> time_stamp;
 vector<float> accel_x;
@@ -39,6 +42,16 @@ int main(){
             }
         }
         log.close();
+    }
+
+    int rows = time_stamp.size();
+
+    vector<float> roll_angle;
+    vector<float> pitch_angle;
+
+    for (int i=0 ; i<rows ; i++){
+        roll_angle.push_back(atan2(accel_x[i], sign(accel_z[i]*sqrt(pow(accel_z[i],2) + MI*pow(accel_x[i],2))))*RAD_TO_DEG);
+        pitch_angle.push_back(atan2(-accel_x[i], sqrt(pow(accel_y[i],2) + pow(accel_z[i],2)))*RAD_TO_DEG);
     }
 
     return 0;
