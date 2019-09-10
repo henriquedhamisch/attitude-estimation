@@ -28,6 +28,16 @@ string float_to_string(float value){
     ss << value;
     return ss.str();
 }
+
+void write_line(fstream &stream, float time_stamp, float roll, float pitch){
+    string line = float_to_string(time_stamp) + ", ";
+    line.append(float_to_string(roll) + ", ");
+    line.append(float_to_string(pitch) + "\n");
+
+    stream << line;
+    return;
+}
+
 int main(){
     fstream log;
     log.open("data.log", ios::in);          // Open log file into the stream object
