@@ -14,6 +14,12 @@ vector<float> accel_y;
 vector<float> accel_z;
 
 
+int sign(int value){
+    if(value > 0) {return 1;}
+    else if(value == 0) {return 0;}
+    else {return -1;}
+}
+
 int main(){
     fstream log;
     log.open("data.log", ios::in);          // Open log file into the stream object
