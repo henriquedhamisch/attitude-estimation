@@ -43,6 +43,18 @@ string float_to_string(float value){
     return ss.str();
 }
 
+vector<float> read_line(string line){
+    stringstream line_ss(line);
+    vector<float> data;
+
+    for (int i=0 ; i<=3; i++){
+        string value;
+        getline(line_ss, value, DELIMITER);
+        data.push_back(stof(value));
+    }
+    return data;
+}
+
 void write_line(fstream &stream, float timestamp, float roll, float pitch){
     string line = float_to_string(timestamp) + ", ";
     line.append(float_to_string(roll) + ", ");
