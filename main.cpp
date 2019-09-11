@@ -17,7 +17,7 @@ vector<float> accel_y;
 vector<float> accel_z;
 
 
-int sign(int value){
+int sign(float value){
     if(value > 0) {return 1;}
     else if(value == 0) {return 0;}
     else {return -1;}
