@@ -93,8 +93,8 @@ vector<float> read_line(string line){
 void write_line(fstream &stream, float timestamp, float roll, float pitch){
     stream.setf(ios::fixed, ios::floatfield);
     stream.precision(3);
-    stream << timestamp << " s:\t";
-    stream << roll << "  ,  ";
+    stream << timestamp << " s:       ";
+    stream << roll << "     ,     ";
     stream << pitch << "\n";
     return;
 }
@@ -125,10 +125,10 @@ int main(){
     }
 
     fstream result;
-    result.open("result.log", ios::out);            // Open output file into the stream object
+    result.open("results.log", ios::out);            // Open output file into the stream object
     result << "Results - Estimator for roll and pitch angles\n\n";
     result << "Data format:\n";
-    result << "Timestamp [s]:\tRoll [deg]   ,   Pitch [deg]\n\n";
+    result << "Timestamp [s]:  Roll [deg]   ,   Pitch [deg]\n\n";
     while(result.is_open()){
         for(int i=0 ; i<timestamp.size() ; i++){    // Iterates through all the samples
             float roll_angle = compute_roll(accel_x[i], accel_y[i], accel_z[i]);
