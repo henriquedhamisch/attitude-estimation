@@ -77,21 +77,13 @@ int main(){
         log.close();
     }
 
-    int rows = time_stamp.size();
-
-    vector<float> roll_angle;
-    vector<float> pitch_angle;
-
-    for (int i=0 ; i<rows ; i++){
-        roll_angle.push_back(atan2(accel_x[i], sign(accel_z[i]*sqrt(pow(accel_z[i],2) + MI*pow(accel_x[i],2))))*RAD_TO_DEG);
-        pitch_angle.push_back(atan2(-accel_x[i], sqrt(pow(accel_y[i],2) + pow(accel_z[i],2)))*RAD_TO_DEG);
-    }
-
     fstream result;
     result.open("result.log", ios::out);
-    if(result.is_open()){
-        for(int i=0 ; i<rows ; i++){
-            write_line(result, time_stamp[i], roll_angle[i], pitch_angle[i]);
+    while(result.is_open()){
+        for(int i=0 ; i<timestamp.size() ; i++){
+            float roll_angle = compute_roll(accel_x[i], accel_y[i], accel_z[i]);
+            float pitch_angle = compute_pitch(accel_x[i], accel_y[i], accel_z[i]);
+            write_line(result, timestamp[i], roll_angle, pitch_angle);
         }
         result.close();
     }
