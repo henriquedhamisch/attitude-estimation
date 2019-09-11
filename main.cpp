@@ -32,11 +32,6 @@ float compute_pitch(float accel_x, float accel_y, float accel_z){
     return atan2(num, den)*RAD_TO_DEG;
 }
 
-string float_to_string(float value){
-    stringstream ss;
-    ss << value;
-    return ss.str();
-}
 
 vector<float> read_line(string line){
     stringstream line_ss(line);
