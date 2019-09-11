@@ -43,8 +43,8 @@ string float_to_string(float value){
     return ss.str();
 }
 
-void write_line(fstream &stream, float time_stamp, float roll, float pitch){
-    string line = float_to_string(time_stamp) + ", ";
+void write_line(fstream &stream, float timestamp, float roll, float pitch){
+    string line = float_to_string(timestamp) + ", ";
     line.append(float_to_string(roll) + ", ");
     line.append(float_to_string(pitch) + "\n");
 
