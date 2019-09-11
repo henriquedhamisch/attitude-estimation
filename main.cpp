@@ -21,12 +21,26 @@ const float RAD_TO_DEG = 180/M_PI;
 const float MG_TO_G = 0.001;
 const float MS_TO_S = 0.001;
 
+/**
+    Returns the sign of a float number.
+
+    @param value The number to compute the sign.
+    @return The sign of the number.
+*/
 int sign(float value){
     if(value > 0) {return 1;}
     else if(value == 0) {return 0;}
     else {return -1;}
 }
 
+/**
+    Estimates the roll angle from accelerometer data.
+
+    @param accel_x Accelerometer output of x-axis.
+    @param accel_y Accelerometer output of y-axis.
+    @param accel_z Accelerometer output of z-axis.
+    @return The estimated roll angle in degrees.
+*/
 float compute_roll(float accel_x, float accel_y, float accel_z){
     float num = accel_y;
     float den = sign(accel_z)*sqrt(pow(accel_z, 2) + MI*pow(accel_x, 2));
@@ -34,6 +48,14 @@ float compute_roll(float accel_x, float accel_y, float accel_z){
     return atan2(num, den)*RAD_TO_DEG;
 }
 
+/**
+    Estimates the pitch angle from accelerometer data.
+
+    @param accel_x Accelerometer output of x-axis.
+    @param accel_y Accelerometer output of y-axis.
+    @param accel_z Accelerometer output of z-axis.
+    @return The estimated pitch angle in degrees.
+*/
 float compute_pitch(float accel_x, float accel_y, float accel_z){
     float num = -accel_x;
     float den = sqrt(pow(accel_y, 2) + pow(accel_z, 2));
@@ -41,7 +63,12 @@ float compute_pitch(float accel_x, float accel_y, float accel_z){
     return atan2(num, den)*RAD_TO_DEG;
 }
 
+/**
+    Extracts the four field of accelerometer data from one log sample.
 
+    @param line Sample of accelerometer data.
+    @return A vector with the four fields (timestamp and accelerometer data).
+*/
 vector<float> read_line(string line){
     stringstream line_ss(line);
     vector<float> data;
@@ -54,6 +81,15 @@ vector<float> read_line(string line){
     return data;
 }
 
+/**
+    Write one sample in the output file (timestamp, roll angle, pitch angle).
+    A fixed float formatting is used to avoid formatting errors.
+
+    @param stream The stream object holding the output object.
+    @param timestamp The sample time in seconds.
+    @param roll The estimated roll angle in degrees.
+    @param roll The estimated pitch angle in degrees.
+*/
 void write_line(fstream &stream, float timestamp, float roll, float pitch){
     stream.setf(ios::fixed, ios::floatfield);
     stream.precision(3);
@@ -63,6 +99,11 @@ void write_line(fstream &stream, float timestamp, float roll, float pitch){
     return;
 }
 
+/**
+    Main function.
+    Opens the log file, parses the data, estimates the roll and pitch angles
+    and write the results to the ouput file.
+*/
 int main(){
     vector<float> timestamp;
     vector<float> accel_x, accel_y, accel_z;
