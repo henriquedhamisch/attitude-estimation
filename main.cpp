@@ -67,16 +67,12 @@ int main(){
     while(log.is_open()){
         string line;
         while(getline(log, line, NEW_LINE)){
-            stringstream line_ss(line);
-            for (int i=0 ; i<=3; i++){
-                string value;
-                getline(line_ss, value, DELIMITER);
+            vector<float> data = read_line(line);
 
-                if(i == 0) { time_stamp.push_back(stof(value)); }
-                else if(i == 1) { accel_x.push_back(stof(value)); }
-                else if(i == 2) { accel_y.push_back(stof(value)); }
-                else if(i == 3) { accel_z.push_back(stof(value)); }
-            }
+            timestamp.push_back(data[0]);
+            accel_x.push_back(data[1]);
+            accel_y.push_back(data[2]);
+            accel_z.push_back(data[3]);
         }
         log.close();
     }
