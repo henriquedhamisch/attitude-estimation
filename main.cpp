@@ -1,3 +1,12 @@
+/**
+    Roll/Pitch Estimator
+    Purpose: Estimates the roll and pitch angles according
+             to data from the MMA8451 accelerometer.
+
+    @author Henrique Daniel Hamisch
+    @date 11/09/2019
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
