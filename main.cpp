@@ -10,12 +10,6 @@ const char NEW_LINE = '\n';
 const float MI = 0.01;
 const float RAD_TO_DEG = 180/M_PI;
 
-vector<float> time_stamp;
-vector<float> accel_x;
-vector<float> accel_y;
-vector<float> accel_z;
-
-
 int sign(float value){
     if(value > 0) {return 1;}
     else if(value == 0) {return 0;}
@@ -64,6 +58,9 @@ void write_line(fstream &stream, float timestamp, float roll, float pitch){
 }
 
 int main(){
+    vector<float> timestamp;
+    vector<float> accel_x, accel_y, accel_z;
+
     fstream log;
     log.open("data.log", ios::in);          // Open log file into the stream object
 
