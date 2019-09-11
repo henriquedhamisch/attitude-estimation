@@ -51,11 +51,11 @@ vector<float> read_line(string line){
 }
 
 void write_line(fstream &stream, float timestamp, float roll, float pitch){
-    string line = float_to_string(timestamp) + ", ";
-    line.append(float_to_string(roll) + ", ");
-    line.append(float_to_string(pitch) + "\n");
-
-    stream << line;
+    stream.setf(ios::fixed, ios::floatfield);
+    stream.precision(3);
+    stream << timestamp << " s:\t";
+    stream << roll << "  ,  ";
+    stream << pitch << "\n";
     return;
 }
 
