@@ -10,6 +10,7 @@ const char NEW_LINE = '\n';
 const float MI = 0.01;
 const float RAD_TO_DEG = 180/M_PI;
 const float MG_TO_G = 0.001;
+const float MS_TO_S = 0.001;
 
 int sign(float value){
     if(value > 0) {return 1;}
@@ -70,7 +71,7 @@ int main(){
         while(getline(log, line, NEW_LINE)){
             vector<float> data = read_line(line);
 
-            timestamp.push_back(data[0]);
+            timestamp.push_back(data[0]*MS_TO_S);
             accel_x.push_back(data[1]*MG_TO_G);
             accel_y.push_back(data[2]*MG_TO_G);
             accel_z.push_back(data[3]*MG_TO_G);
