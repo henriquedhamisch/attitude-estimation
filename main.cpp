@@ -93,7 +93,11 @@ vector<float> read_line(string line){
 void write_line(fstream &stream, float timestamp, float roll, float pitch){
     stream.setf(ios::fixed, ios::floatfield);
     stream.precision(3);
+<<<<<<< HEAD
     stream << timestamp << " s:       ";
+=======
+    stream << timestamp << " s:\t";
+>>>>>>> 8c3d12b36f46717660dfcd258e908d6f2489c0f9
     stream << roll << "     ,     ";
     stream << pitch << "\n";
     return;
