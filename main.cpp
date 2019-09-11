@@ -9,6 +9,7 @@ const char DELIMITER = ';';
 const char NEW_LINE = '\n';
 const float MI = 0.01;
 const float RAD_TO_DEG = 180/M_PI;
+const float MG_TO_G = 0.001;
 
 int sign(float value){
     if(value > 0) {return 1;}
@@ -70,9 +71,9 @@ int main(){
             vector<float> data = read_line(line);
 
             timestamp.push_back(data[0]);
-            accel_x.push_back(data[1]);
-            accel_y.push_back(data[2]);
-            accel_z.push_back(data[3]);
+            accel_x.push_back(data[1]*MG_TO_G);
+            accel_y.push_back(data[2]*MG_TO_G);
+            accel_z.push_back(data[3]*MG_TO_G);
         }
         log.close();
     }
