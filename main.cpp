@@ -113,11 +113,11 @@ int main(){
 
     while(log.is_open()){
         string line;
-        while(getline(log, line, NEW_LINE)){
-            vector<float> data = read_line(line);
+        while(getline(log, line, NEW_LINE)){        // Get one line from the log file
+            vector<float> data = read_line(line);   // Extract the information from the line
 
-            timestamp.push_back(data[0]*MS_TO_S);
-            accel_x.push_back(data[1]*MG_TO_G);
+            timestamp.push_back(data[0]*MS_TO_S);   // Converts timestamp to seconds and store it
+            accel_x.push_back(data[1]*MG_TO_G);     // Converts accelerometer data to g-units and store it
             accel_y.push_back(data[2]*MG_TO_G);
             accel_z.push_back(data[3]*MG_TO_G);
         }
@@ -125,15 +125,15 @@ int main(){
     }
 
     fstream result;
-    result.open("result.log", ios::out);
+    result.open("result.log", ios::out);            // Open output file into the stream object
     result << "Results - Estimator for roll and pitch angles\n\n";
     result << "Data format:\n";
     result << "Timestamp [s]:\tRoll [deg]   ,   Pitch [deg]\n\n";
     while(result.is_open()){
-        for(int i=0 ; i<timestamp.size() ; i++){
+        for(int i=0 ; i<timestamp.size() ; i++){    // Iterates through all the samples
             float roll_angle = compute_roll(accel_x[i], accel_y[i], accel_z[i]);
             float pitch_angle = compute_pitch(accel_x[i], accel_y[i], accel_z[i]);
-            write_line(result, timestamp[i], roll_angle, pitch_angle);
+            write_line(result, timestamp[i], roll_angle, pitch_angle);      // Save sample to the output file
         }
         result.close();
     }
