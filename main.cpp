@@ -76,6 +76,9 @@ int main(){
 
     fstream result;
     result.open("result.log", ios::out);
+    result << "Results - Estimator for roll and pitch angles\n\n";
+    result << "Data format:\n";
+    result << "Timestamp [s]:\tRoll [deg]   ,   Pitch [deg]\n\n";
     while(result.is_open()){
         for(int i=0 ; i<timestamp.size() ; i++){
             float roll_angle = compute_roll(accel_x[i], accel_y[i], accel_z[i]);
