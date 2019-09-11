@@ -23,6 +23,20 @@ int sign(float value){
     else {return -1;}
 }
 
+float compute_roll(float accel_x, float accel_y, float accel_z){
+    float num = accel_y;
+    float den = sign(accel_z)*sqrt(pow(accel_z, 2) + MI*pow(accel_x, 2));
+
+    return atan2(num, den)*RAD_TO_DEG;
+}
+
+float compute_pitch(float accel_x, float accel_y, float accel_z){
+    float num = -accel_x;
+    float den = sqrt(pow(accel_y, 2) + pow(accel_z, 2));
+
+    return atan2(num, den)*RAD_TO_DEG;
+}
+
 string float_to_string(float value){
     stringstream ss;
     ss << value;
